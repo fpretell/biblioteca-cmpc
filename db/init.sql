@@ -65,6 +65,11 @@ CREATE TABLE usuarios (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS test (
+  id SERIAL PRIMARY KEY,
+  nombre TEXT NOT NULL
+);
+
 -- ============================
 -- Índices
 -- ============================
@@ -154,6 +159,17 @@ VALUES (
   'Admin'
 );
 
+INSERT INTO test (nombre) VALUES
+  ('Juan'),
+  ('Ana'),
+  ('Luis'),
+  ('María'),
+  ('Jorge'),
+  ('Laura'),
+  ('Pedro'),
+  ('Sofía'),
+  ('Diego'),
+  ('Lucía');
 
 
 
