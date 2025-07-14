@@ -6,6 +6,7 @@
     "rootDir": "./src",
     "strict": false,
     "types": ["node", "jest"],
+    // "types": ["node"],
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -16,7 +17,6 @@
       "src/*": ["src/*"]
     }
   },
-  // "include": ["src", "common", "test", "jest.config.ts"],
-  "include": ["src/**/*"],
+  "include": ["src", "test", "jest.config.ts"],
   "exclude": ["node_modules", "dist"]
 }
