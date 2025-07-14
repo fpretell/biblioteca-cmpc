@@ -3,8 +3,7 @@ version: '3.8'
 services:
   db:
     image: postgres:15
-    container_name: postgres_libros
-    restart: always
+    container_name: cmpc_libros_db
     environment:
       POSTGRES_USER: libros_user
       POSTGRES_PASSWORD: libros_pass
@@ -12,17 +11,31 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - cmpc_db_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
 
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
-    container_name: nest_api
+    container_name: cmpc_libros_api
+    working_dir: /usr/src/app
     ports:
       - "3000:3000"
-    env_file:
-      - ./backend/.env
     depends_on:
       - db
+    volumes:
+      - ./backend:/usr/src/app
+      - ./backend/uploads:/usr/src/app/uploads
+      - ./backend/.env:/usr/src/app/.env
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: libros_user
+      DB_PASSWORD: libros_pass
+      DB_NAME: cmpc_libros
+      CHOKIDAR_USEPOLLING: "true"
+    command: ["npm", "run", "start:dev"]
+
+volumes:
+  cmpc_db_data:
 
