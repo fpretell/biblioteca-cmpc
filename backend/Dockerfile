@@ -1,23 +1,22 @@
-FROM node:18-alpine
+# Usa Node oficial
+FROM node:18
 
+# Crear directorio de trabajo
 WORKDIR /app
 
-# Instalar Nest CLI
-RUN npm install -g @nestjs/cli
-
-# Copiar e instalar dependencias
+# Copiar package.json y package-lock.json
 COPY package*.json ./
-RUN npm install
 
-# Copiar código
+# ✅ Instalá TODO (prod + dev)
+RUN npm install --legacy-peer-deps
+
+# Copiar el resto
 COPY . .
 
-# Compilar el proyecto
+# Compilar
 RUN npm run build
 
-# Exponer puerto NestJS
-EXPOSE 3000
+#CMD ["npm", "run", "start:prod"]
+CMD ["npx", "nest", "start", "--watch"]
 
-# Correr app en modo producción
-CMD ["npm", "run", "start:prod"]
 
