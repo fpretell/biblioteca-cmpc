@@ -1,20 +1,23 @@
-# Usa imagen oficial de Node
-FROM node:18
+FROM node:18-alpine
 
-# Directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia solo los archivos necesarios para instalar deps
+# Instalar Nest CLI
+RUN npm install -g @nestjs/cli
+
+# Copiar e instalar dependencias
 COPY package*.json ./
+RUN npm install
 
-# Instala dependencias (usa --legacy-peer-deps para resolver conflictos)
-RUN npm install --legacy-peer-deps
-
-# Copia el resto del código fuente
+# Copiar código
 COPY . .
 
-# Compila el proyecto
+# Compilar el proyecto
 RUN npm run build
 
-# Usa npx para levantar NestJS en modo dev
-CMD ["npx", "nest", "start", "--watch"]
+# Exponer puerto NestJS
+EXPOSE 3000
+
+# Correr app en modo producción
+CMD ["npm", "run", "start:prod"]
+
