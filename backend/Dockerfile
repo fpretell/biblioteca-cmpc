@@ -1,22 +1,20 @@
-# Usa Node oficial
+# Usa imagen oficial de Node
 FROM node:18
 
-# Crear directorio de trabajo
+# Directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiar package.json y package-lock.json
+# Copia solo los archivos necesarios para instalar deps
 COPY package*.json ./
 
-# ✅ Instalá TODO (prod + dev)
+# Instala dependencias (usa --legacy-peer-deps para resolver conflictos)
 RUN npm install --legacy-peer-deps
 
-# Copiar el resto
+# Copia el resto del código fuente
 COPY . .
 
-# Compilar
+# Compila el proyecto
 RUN npm run build
 
-#CMD ["npm", "run", "start:prod"]
+# Usa npx para levantar NestJS en modo dev
 CMD ["npx", "nest", "start", "--watch"]
-
-
