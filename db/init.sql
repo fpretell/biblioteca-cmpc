@@ -128,32 +128,33 @@ INSERT INTO generos (nombre) VALUES
 ('Biografía');
 
 -- Libros (IDs del 11 al 35)
+-- LIBROS
 INSERT INTO libros (titulo, precio, disponible, autor_id, editorial_id, genero_id) VALUES
-('El Aleph', 950.00, true, 3, 3, 8),
-('Los Detectives Salvajes', 1250.00, true, 11, 11, 6),
-('Pedro Páramo', 1000.00, true, 12, 12, 1),
-('La Tregua', 850.00, true, 13, 13, 1),
-('Pantaleón y las Visitadoras', 1150.00, false, 4, 4, 2),
-('El Amor en los Tiempos del Cólera', 1400.00, true, 1, 1, 1),
-('Crónica de una Muerte Anunciada', 1000.00, true, 1, 1, 1),
-('El Túnel', 900.00, true, 14, 14, 6),
-('Sobre Héroes y Tumbas', 1100.00, true, 14, 14, 6),
-('La Fiesta del Chivo', 1500.00, true, 4, 4, 2),
-('El Llano en Llamas', 950.00, true, 12, 12, 1),
-('El Entenado', 980.00, true, 15, 15, 8),
-('Zama', 990.00, true, 16, 16, 6),
-('El Beso de la Mujer Araña', 1050.00, false, 17, 17, 7),
-('Ensayo sobre la Ceguera', 1300.00, true, 18, 18, 9),
-('El Evangelio Según Jesucristo', 1350.00, true, 18, 18, 9),
-('La Muerte de Artemio Cruz', 1250.00, true, 19, 19, 1),
-('Aura', 870.00, true, 19, 19, 1),
-('Santa Evita', 1150.00, true, 20, 20, 7),
-('El Secreto de sus Ojos', 1080.00, false, 21, 21, 7),
-('Los Siete Locos', 940.00, true, 22, 22, 6),
-('La Invención de Morel', 890.00, true, 23, 23, 8),
-('El Reino de este Mundo', 910.00, true, 24, 24, 9),
-('La Palabra del Mudo', 930.00, true, 25, 25, 4),
-('Travesuras de la Niña Mala', 1200.00, true, 4, 4, 2);
+('Cien Años de Soledad', 1500.00, true, 1, 1, 1),
+('La Casa de los Espíritus', 1450.00, true, 2, 2, 1),
+('Ficciones', 1300.00, true, 3, 3, 8),
+('Conversación en La Catedral', 1400.00, true, 4, 4, 6),
+('Rayuela', 1350.00, false, 5, 5, 6),
+('Como Agua para Chocolate', 1200.00, true, 6, 6, 1),
+('La Sombra del Viento', 1250.00, true, 7, 7, 6),
+('Veinte Poemas de Amor', 900.00, true, 8, 8, 4),
+('Don Quijote de la Mancha', 1700.00, true, 9, 9, 3),
+('Bodas de Sangre', 950.00, false, 10, 10, 5),
+('El Otoño del Patriarca', 1100.00, true, 1, 2, 1),
+('De Amor y de Sombra', 1080.00, true, 2, 3, 1),
+('El Aleph', 980.00, true, 3, 4, 8),
+('La Guerra del Fin del Mundo', 1200.00, true, 4, 5, 2),
+('Final del Juego', 990.00, true, 5, 6, 8),
+('Tan Veloz Como el Deseo', 1050.00, true, 6, 7, 1),
+('El Juego del Ángel', 1150.00, false, 7, 8, 6),
+('Cien Sonetos de Amor', 870.00, true, 8, 9, 4),
+('Novelas Ejemplares', 940.00, true, 9, 10, 9),
+('Yerma', 930.00, true, 10, 1, 5),
+('El Coronel No Tiene Quien Le Escriba', 1100.00, true, 1, 3, 1),
+('Paula', 1000.00, true, 2, 4, 10),
+('El Informe de Brodie', 1020.00, false, 3, 5, 8),
+('La Ciudad y los Perros', 1250.00, true, 4, 6, 2),
+('Bestiario', 950.00, true, 5, 7, 8);
 
 -- Inventario (libro_id del 11 al 35)
 INSERT INTO inventario (libro_id, cantidad, fecha) VALUES
