@@ -127,30 +127,61 @@ INSERT INTO generos (nombre) VALUES
 ('Literatura Infantil'),
 ('Biografía');
 
--- LIBROS
+-- Libros (IDs del 11 al 35)
 INSERT INTO libros (titulo, precio, disponible, autor_id, editorial_id, genero_id) VALUES
-('Cien Años de Soledad', 1500.00, true, 1, 1, 1),
-('La Casa de los Espíritus', 1200.00, true, 2, 2, 1),
-('Ficciones', 900.00, true, 3, 3, 8),
-('La Ciudad y los Perros', 1300.00, true, 4, 4, 2),
-('Rayuela', 1100.00, false, 5, 5, 6),
-('Como Agua para Chocolate', 1000.00, true, 6, 6, 1),
-('La Sombra del Viento', 1400.00, true, 7, 7, 6),
-('Veinte Poemas de Amor', 700.00, true, 8, 8, 4),
-('Don Quijote de la Mancha', 1600.00, true, 9, 9, 2),
-('Bodas de Sangre', 800.00, true, 10, 10, 5);
+('El Aleph', 950.00, true, 3, 3, 8),
+('Los Detectives Salvajes', 1250.00, true, 11, 11, 6),
+('Pedro Páramo', 1000.00, true, 12, 12, 1),
+('La Tregua', 850.00, true, 13, 13, 1),
+('Pantaleón y las Visitadoras', 1150.00, false, 4, 4, 2),
+('El Amor en los Tiempos del Cólera', 1400.00, true, 1, 1, 1),
+('Crónica de una Muerte Anunciada', 1000.00, true, 1, 1, 1),
+('El Túnel', 900.00, true, 14, 14, 6),
+('Sobre Héroes y Tumbas', 1100.00, true, 14, 14, 6),
+('La Fiesta del Chivo', 1500.00, true, 4, 4, 2),
+('El Llano en Llamas', 950.00, true, 12, 12, 1),
+('El Entenado', 980.00, true, 15, 15, 8),
+('Zama', 990.00, true, 16, 16, 6),
+('El Beso de la Mujer Araña', 1050.00, false, 17, 17, 7),
+('Ensayo sobre la Ceguera', 1300.00, true, 18, 18, 9),
+('El Evangelio Según Jesucristo', 1350.00, true, 18, 18, 9),
+('La Muerte de Artemio Cruz', 1250.00, true, 19, 19, 1),
+('Aura', 870.00, true, 19, 19, 1),
+('Santa Evita', 1150.00, true, 20, 20, 7),
+('El Secreto de sus Ojos', 1080.00, false, 21, 21, 7),
+('Los Siete Locos', 940.00, true, 22, 22, 6),
+('La Invención de Morel', 890.00, true, 23, 23, 8),
+('El Reino de este Mundo', 910.00, true, 24, 24, 9),
+('La Palabra del Mudo', 930.00, true, 25, 25, 4),
+('Travesuras de la Niña Mala', 1200.00, true, 4, 4, 2);
 
+-- Inventario (libro_id del 11 al 35)
 INSERT INTO inventario (libro_id, cantidad, fecha) VALUES
-(1, 15, NOW() - INTERVAL '10 days'),
-(2, 30, NOW() - INTERVAL '9 days'),
-(3, 5,  NOW() - INTERVAL '8 days'),
-(4, 12, NOW() - INTERVAL '7 days'),
-(5, 25, NOW() - INTERVAL '6 days'),
-(6, 7,  NOW() - INTERVAL '5 days'),
-(7, 18, NOW() - INTERVAL '4 days'),
-(8, 22, NOW() - INTERVAL '3 days'),
-(9, 10, NOW() - INTERVAL '2 days'),
-(10,14, NOW() - INTERVAL '1 day');
+(11, 13, NOW() - INTERVAL '11 days'),
+(12, 20, NOW() - INTERVAL '10 days'),
+(13, 10, NOW() - INTERVAL '9 days'),
+(14, 16, NOW() - INTERVAL '8 days'),
+(15, 8,  NOW() - INTERVAL '7 days'),
+(16, 17, NOW() - INTERVAL '6 days'),
+(17, 14, NOW() - INTERVAL '5 days'),
+(18, 12, NOW() - INTERVAL '4 days'),
+(19, 19, NOW() - INTERVAL '3 days'),
+(20, 11, NOW() - INTERVAL '2 days'),
+(21, 15, NOW() - INTERVAL '1 day'),
+(22, 6,  NOW()),
+(23, 9,  NOW()),
+(24, 5,  NOW()),
+(25, 7,  NOW()),
+(26, 18, NOW()),
+(27, 3,  NOW()),
+(28, 14, NOW()),
+(29, 8,  NOW()),
+(30, 20, NOW()),
+(31, 12, NOW()),
+(32, 10, NOW()),
+(33, 15, NOW()),
+(34, 9,  NOW()),
+(35, 13, NOW());
 
 INSERT INTO usuarios (email, password, nombre)
 VALUES (
@@ -158,19 +189,4 @@ VALUES (
   '$2b$10$.pPALROharBoTAjldiSh/efR9YzcTj.BNXsllIwKfsW9tB1.ST4we',
   'Admin'
 );
-
-INSERT INTO test (nombre) VALUES
-  ('Juan'),
-  ('Ana'),
-  ('Luis'),
-  ('María'),
-  ('Jorge'),
-  ('Laura'),
-  ('Pedro'),
-  ('Sofía'),
-  ('Diego'),
-  ('Lucía');
-
-
-
 

@@ -5,20 +5,9 @@ import debounce from 'lodash.debounce';
 import LibroTable from '../components/LibroTable';
 import Paginacion from '../components/Paginacion';
 
-type Autor = {
-  id: number;
-  nombre: string;
-};
-
-type Editorial = {
-  id: number;
-  nombre: string;
-};
-
-type Genero = {
-  id: number;
-  nombre: string;
-};
+type Autor = { id: number; nombre: string };
+type Editorial = { id: number; nombre: string };
+type Genero = { id: number; nombre: string };
 
 export type Libro = {
   id: number;
@@ -50,6 +39,7 @@ export default function LibrosListPage() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+
   const [filtros, setFiltros] = useState<Filtros>({
     genero_id: '',
     editorial_id: '',
@@ -61,6 +51,10 @@ export default function LibrosListPage() {
     order4: '',
     search: '',
   });
+
+  const [generos, setGeneros] = useState<Genero[]>([]);
+  const [editoriales, setEditoriales] = useState<Editorial[]>([]);
+  const [autores, setAutores] = useState<Autor[]>([]);
 
   const LIMIT = 10;
 
@@ -93,6 +87,21 @@ export default function LibrosListPage() {
     }
   }, []);
 
+  const fetchOpcionesFiltros = async () => {
+    try {
+      const [resGeneros, resEditoriales, resAutores] = await Promise.all([
+        axios.get('/generos'),
+        axios.get('/editoriales'),
+        axios.get('/autores'),
+      ]);
+      setGeneros(resGeneros.data);
+      setEditoriales(resEditoriales.data);
+      setAutores(resAutores.data);
+    } catch (err) {
+      console.error('Error cargando filtros:', err);
+    }
+  };
+
   const debouncedSearch = useCallback(
     debounce((searchTerm: string, filtrosActuales: Filtros) => {
       fetchLibros(1, { ...filtrosActuales, search: searchTerm });
@@ -123,85 +132,94 @@ export default function LibrosListPage() {
 
   useEffect(() => {
     fetchLibros(page, filtros);
+    fetchOpcionesFiltros();
   }, []); // solo al montar
 
   return (
     <div className="container mt-4">
-      <h1>Listado de Libros</h1>
-
-      {/* Filtros */}
-      <div className="row mb-2">
-        <div className="col-md-2">
-          <input
-            type="text"
-            name="search"
-            value={filtros.search}
-            placeholder="Buscar título..."
-            onChange={handleFiltroChange}
-            className="form-control"
-          />
-        </div>
-        <div className="col-md-2">
-          <select name="genero_id" value={filtros.genero_id} onChange={handleFiltroChange} className="form-select">
-            <option value="">-- Género --</option>
-            <option value="1">Ficción</option>
-            <option value="2">No ficción</option>
-          </select>
-        </div>
-        <div className="col-md-2">
-          <select name="editorial_id" value={filtros.editorial_id} onChange={handleFiltroChange} className="form-select">
-            <option value="">-- Editorial --</option>
-            <option value="1">Editorial A</option>
-            <option value="2">Editorial B</option>
-          </select>
-        </div>
-        <div className="col-md-2">
-          <select name="autor_id" value={filtros.autor_id} onChange={handleFiltroChange} className="form-select">
-            <option value="">-- Autor --</option>
-            <option value="1">Autor 1</option>
-            <option value="2">Autor 2</option>
-          </select>
-        </div>
-        <div className="col-md-2">
-          <select name="disponible" value={filtros.disponible} onChange={handleFiltroChange} className="form-select">
-            <option value="">-- Disponible --</option>
-            <option value="true">Sí</option>
-            <option value="false">No</option>
-          </select>
-        </div>
+      <div className="d-flex justify-content-between align-items-center mb-3">
+        <h2 className="mb-3 text-center">📚 Listado de Libros</h2>
       </div>
 
-      {/* Ordenamiento */}
-      <div className="row mb-3">
-        {['order1', 'order2', 'order3', 'order4'].map((orderKey, idx) => (
-          <div className="col-md-3" key={orderKey}>
-            <label className="form-label">Ordenar por ({idx + 1}°)</label>
-            <select
-              name={orderKey}
-              value={(filtros as any)[orderKey]}
-              onChange={handleFiltroChange}
-              className="form-select"
-            >
-              <option value="">-- Orden {idx + 1} --</option>
-              <option value="titulo:asc">Título ↑</option>
-              <option value="titulo:desc">Título ↓</option>
-              <option value="precio:asc">Precio ↑</option>
-              <option value="precio:desc">Precio ↓</option>
-              <option value="editorial:asc">Editorial ↑</option>
-              <option value="editorial:desc">Editorial ↓</option>
-              <option value="genero:asc">Género ↑</option>
-              <option value="genero:desc">Género ↓</option>
-            </select>
+      <div className="card mb-4 shadow-sm">
+        <div className="card-header fw-bold">Filtros y Ordenamiento</div>
+        <div className="card-body">
+          <div className="row mb-3">
+            <div className="col-md-3">
+              <input
+                type="text"
+                name="search"
+                value={filtros.search}
+                placeholder="Buscar título..."
+                onChange={handleFiltroChange}
+                className="form-control"
+              />
+            </div>
+            <div className="col-md-3">
+              <select name="genero_id" value={filtros.genero_id} onChange={handleFiltroChange} className="form-select">
+                <option value="">-- Género --</option>
+                {generos.map((g) => (
+                  <option key={g.id} value={g.id}>{g.nombre}</option>
+                ))}
+              </select>
+            </div>
+            <div className="col-md-3">
+              <select name="editorial_id" value={filtros.editorial_id} onChange={handleFiltroChange} className="form-select">
+                <option value="">-- Editorial --</option>
+                {editoriales.map((e) => (
+                  <option key={e.id} value={e.id}>{e.nombre}</option>
+                ))}
+              </select>
+            </div>
+            <div className="col-md-3">
+              <select name="autor_id" value={filtros.autor_id} onChange={handleFiltroChange} className="form-select">
+                <option value="">-- Autor --</option>
+                {autores.map((a) => (
+                  <option key={a.id} value={a.id}>{a.nombre}</option>
+                ))}
+              </select>
+            </div>
           </div>
-        ))}
+
+          <div className="row mb-3">
+            <div className="col-md-3">
+              <select name="disponible" value={filtros.disponible} onChange={handleFiltroChange} className="form-select">
+                <option value="">-- Disponible --</option>
+                <option value="true">Sí</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="row">
+            {['order1', 'order2', 'order3', 'order4'].map((orderKey, idx) => (
+              <div className="col-md-3" key={orderKey}>
+                <label className="form-label">Ordenar por ({idx + 1}°)</label>
+                <select
+                  id={orderKey}
+                  name={orderKey}
+                  value={filtros[orderKey as keyof Filtros]}
+                  onChange={handleFiltroChange}
+                  className="form-select"
+                >
+                  <option value="">-- Orden {idx + 1} --</option>
+                  <option value="titulo:asc">Título ↑</option>
+                  <option value="titulo:desc">Título ↓</option>
+                  <option value="precio:asc">Precio ↑</option>
+                  <option value="precio:desc">Precio ↓</option>
+                  <option value="editorial:asc">Editorial ↑</option>
+                  <option value="editorial:desc">Editorial ↓</option>
+                  <option value="genero:asc">Género ↑</option>
+                  <option value="genero:desc">Género ↓</option>
+                </select>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Tabla de libros */}
-      {loading ? (
-        <p>Cargando libros...</p>
-      ) : (
-        <LibroTable libros={libros} />
-      )}
+      {loading ? <p>Cargando libros...</p> : <LibroTable libros={libros} />}
 
       {/* Paginación */}
       <Paginacion page={page} totalPages={totalPages} onPageChange={handlePageChange} />

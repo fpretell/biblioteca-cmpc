@@ -1,13 +1,5 @@
-# Node
-node_modules/
-dist/
+# Ignorar todos los .env
 .env
-
-# Docker
-*.log
-docker-compose.override.yml
-
-# IDEs
-.vscode/
-.idea/
+backend/.env
+frontend/.env
 

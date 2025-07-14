@@ -1,46 +1,65 @@
-# Getting Started with Create React App
+Frontend ReactJS + TypeScript - Proyecto Dockerizado
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecto frontend está desarrollado con ReactJS y TypeScript. Forma parte de una arquitectura desplegada con Docker Compose, por lo que no es necesario instalar dependencias ni correr localmente dentro de la carpeta frontend.
 
-## Available Scripts
+Cómo ejecutar
 
-In the project directory, you can run:
+Se levanta todo con Docker Compose desde la raíz del proyecto:
 
-### `npm start`
+bash
+Copiar
+Editar
+docker-compose up --build
+Esto construirá la imagen del frontend y levantará el contenedor con el servidor de desarrollo configurado.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Scripts disponibles dentro del contenedor
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+bash
+Copiar
+Editar
+npm start       # Levanta el servidor de desarrollo (hot reload)
+npm run build   # Genera la versión de producción
+npm run test    # Ejecuta los tests
+Variables de entorno
 
-### `npm test`
+El frontend utiliza variables de entorno definidas en un archivo .env (en la raíz o en la carpeta frontend):
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Ejemplo básico:
 
-### `npm run build`
+ini
+Copiar
+Editar
+REACT_APP_API_BASE_URL=http://localhost:3000/api/v1
+REACT_APP_API_VERSION=v1
+PORT=3000
+REACT_APP_DEFAULT_EMAIL=admin@example.com
+REACT_APP_DEFAULT_PASSWORD=TuPassword123
+Puertos
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Internamente el servidor React corre en el puerto 3000.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+En Docker Compose se puede mapear a cualquier puerto externo, por ejemplo 3001.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Acceso
 
-### `npm run eject`
+Luego de levantar el servicio, el frontend será accesible en:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+arduino
+Copiar
+Editar
+http://localhost:3001
+(o el puerto que hayas configurado)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Notas
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+No se necesita correr npm install ni otros comandos dentro de la carpeta local frontend.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Todo el manejo de dependencias y build se realiza dentro del contenedor Docker.
 
-## Learn More
+Para ejecutar comandos específicos o depurar, podés abrir consola en el contenedor frontend:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+bash
+Copiar
+Editar
+docker exec -it <nombre_contenedor_frontend> sh
+Autor
