@@ -154,35 +154,35 @@ INSERT INTO libros (titulo, precio, disponible, autor_id, editorial_id, genero_i
 ('Paula', 1000.00, true, 2, 4, 10),
 ('El Informe de Brodie', 1020.00, false, 3, 5, 8),
 ('La Ciudad y los Perros', 1250.00, true, 4, 6, 2),
-('Bestiario', 950.00, true, 5, 7, 8);
+('Bestiario', 950.00, true, 5, 7, 8); 
 
--- Inventario (libro_id del 11 al 35)
+-- Inventario (libro_id del 1 al 25)
 INSERT INTO inventario (libro_id, cantidad, fecha) VALUES
-(11, 13, NOW() - INTERVAL '11 days'),
-(12, 20, NOW() - INTERVAL '10 days'),
-(13, 10, NOW() - INTERVAL '9 days'),
-(14, 16, NOW() - INTERVAL '8 days'),
-(15, 8,  NOW() - INTERVAL '7 days'),
-(16, 17, NOW() - INTERVAL '6 days'),
-(17, 14, NOW() - INTERVAL '5 days'),
-(18, 12, NOW() - INTERVAL '4 days'),
-(19, 19, NOW() - INTERVAL '3 days'),
-(20, 11, NOW() - INTERVAL '2 days'),
-(21, 15, NOW() - INTERVAL '1 day'),
-(22, 6,  NOW()),
-(23, 9,  NOW()),
-(24, 5,  NOW()),
-(25, 7,  NOW()),
-(26, 18, NOW()),
-(27, 3,  NOW()),
-(28, 14, NOW()),
-(29, 8,  NOW()),
-(30, 20, NOW()),
-(31, 12, NOW()),
-(32, 10, NOW()),
-(33, 15, NOW()),
-(34, 9,  NOW()),
-(35, 13, NOW());
+(1, 13, NOW() - INTERVAL '11 days'),
+(2, 20, NOW() - INTERVAL '10 days'),
+(3, 10, NOW() - INTERVAL '9 days'),
+(4, 16, NOW() - INTERVAL '8 days'),
+(5, 8,  NOW() - INTERVAL '7 days'),
+(6, 17, NOW() - INTERVAL '6 days'),
+(7, 14, NOW() - INTERVAL '5 days'),
+(8, 12, NOW() - INTERVAL '4 days'),
+(9, 19, NOW() - INTERVAL '3 days'),
+(10, 11, NOW() - INTERVAL '2 days'),
+(11, 15, NOW() - INTERVAL '1 day'),
+(12, 6,  NOW()),
+(13, 9,  NOW()),
+(14, 5,  NOW()),
+(15, 7,  NOW()),
+(16, 18, NOW()),
+(17, 3,  NOW()),
+(18, 14, NOW()),
+(19, 8,  NOW()),
+(20, 20, NOW()),
+(21, 12, NOW()),
+(22, 10, NOW()),
+(23, 15, NOW()),
+(24, 9,  NOW()),
+(25, 13, NOW());
 
 INSERT INTO usuarios (email, password, nombre)
 VALUES (
