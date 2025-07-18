@@ -23,7 +23,7 @@ describe('LibrosService', () => {
                     models: [libro_model_1.Libro, inventario_model_1.Inventario, auditoria_model_1.Auditoria, autor_model_1.Autor, editorial_model_1.Editorial, genero_model_1.Genero],
                     synchronize: true,
                 }),
-                sequelize_1.SequelizeModule.forFeature([libro_model_1.Libro, inventario_model_1.Inventario, auditoria_model_1.Auditoria]),
+                sequelize_1.SequelizeModule.forFeature([libro_model_1.Libro, inventario_model_1.Inventario, auditoria_model_1.Auditoria, autor_model_1.Autor, editorial_model_1.Editorial, genero_model_1.Genero]),
             ],
             providers: [libros_service_1.LibrosService],
         }).compile();
@@ -64,19 +64,18 @@ describe('LibrosService', () => {
     });
     it('findAll should return array of libros', async () => {
         const libros = await service.findAll({});
-        expect(Array.isArray(libros)).toBe(true);
-        // expect(libros.length).toBeGreaterThan(0);
+        expect(Array.isArray(libros.libros)).toBe(true);
         expect(libros.libros.length).toBeGreaterThan(0);
     });
     it('findOne should return a single libro', async () => {
         const all = await service.findAll({});
-        const libro = await service.findOne(all[0].id);
+        const libro = await service.findOne(all.libros[0].id);
         expect(libro).toBeDefined();
-        expect(libro.id).toBe(all[0].id);
+        expect(libro.id).toBe(all.libros[0].id);
     });
     it('update should modify an existing libro', async () => {
         const all = await service.findAll({});
-        const updated = await service.update(all[0].id, {
+        const updated = await service.update(all.libros[0].id, {
             titulo: 'Nuevo Titulo',
             precio: 999,
             disponible: false,
