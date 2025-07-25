@@ -68,6 +68,7 @@ DB_PASSWORD=libros_pass
 DB_NAME=cmpc_libros
 JWT_SECRET=libros_secret
 JWT_EXPIRES_IN=2h
+FRONTEND_URL=<url-frontend>:3001
 ```
 
 ### 3. Crea el archivo `.env` para el frontend
