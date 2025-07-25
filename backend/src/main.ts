@@ -6,10 +6,14 @@ import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 import * as express from 'express';
 import { NestExpressApplication } from '@nestjs/platform-express'; // <-- Importante
 import * as path from 'path';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
-  // const app = await NestFactory.create(AppModule);
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const configService = app.get(ConfigService);
+
+  // Frontend url from env
+  const frontendUrl = configService.get<string>('FRONTEND_URL');
 
   // ✅ Pipes globales de validación
   app.useGlobalPipes(new ValidationPipe({
@@ -21,9 +25,8 @@ async function bootstrap() {
   // ✅ Filtros Globales Errores
   app.useGlobalFilters(new AllExceptionsFilter());
 
-  // Prefijo Globla
+  // Prefijo Global
   app.setGlobalPrefix('api/v1');
-
 
   // ✅ Swagger config
   const config = new DocumentBuilder()
@@ -63,7 +66,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/v1/docs', app, document); // ⬅ Swagger bajo mismo prefijo
   app.enableCors({
-    origin: ['http://localhost:3001', 'http://ec2-18-231-7-213.sa-east-1.compute.amazonaws.com:3001'],
+    origin: ['http://localhost:3001', frontendUrl],
     credentials: true,
   });
 
