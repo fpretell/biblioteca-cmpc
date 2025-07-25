@@ -63,7 +63,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/v1/docs', app, document); // ⬅ Swagger bajo mismo prefijo
   app.enableCors({
-    origin: 'http://localhost:3001',
+    origin: ['http://localhost:3001', 'http://ec2-18-231-7-213.sa-east-1.compute.amazonaws.com:3001'],
     credentials: true,
   });
 
