@@ -30,8 +30,8 @@ async function bootstrap() {
 
   // ✅ Swagger config
   const config = new DocumentBuilder()
-    .setTitle('CMPC Libros API')
-    // .setDescription('Documentación Swagger de la API de CMPC Libros')
+    .setTitle('Gestión Libros API')
+    // .setDescription('Documentación Swagger de la API de Gestión Libros')
     .setDescription(`
     API para la gestión de libros.
 

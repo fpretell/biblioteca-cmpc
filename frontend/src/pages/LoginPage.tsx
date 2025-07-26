@@ -37,7 +37,7 @@ const handleSubmit = async (e: React.FormEvent) => {
       }}
     >
       <div className="card p-5 shadow-lg" style={{ width: '100%', maxWidth: '500px', borderRadius: '1rem' }}>
-        <h2 className="text-center mb-4 text-primary">Biblioteca CMPC Login</h2>
+        <h2 className="text-center mb-4 text-primary">Biblioteca Gestiòn Login</h2>
         <form onSubmit={handleSubmit} autoComplete="off">
           <div className="mb-4">
             <label className="form-label text-white">Email</label>
